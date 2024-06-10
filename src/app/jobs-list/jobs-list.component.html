@@ -11,9 +11,9 @@
       </span>
     </div>
     <div class="col-sm-2"><span *ngIf="isFavorite() === 'false'" class="icon-star" [class.active]="job.isFavorite" (click)="addOrRemoveFavorite(job.id)"  id="star-{{ job.id }}"></span></div>
+    </div>
   </div>
   <div class="card fluid" *ngIf="isFavorite() === 'true' && (jobsList() | favoriteFilter: isFavorite() === 'true').length === 0">
     <span>No favorites</span>
   </div>
-</div>
 
