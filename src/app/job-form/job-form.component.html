@@ -1,8 +1,8 @@
 <ng-container *ngIf="jobDetail() as jobDetail">
   <button (click)="goBack()"><span class="icon-home"></span> Back</button>
   <div class="row">
-    <figure><img src="{{jobDetail.companyLogo}}" alt="Logo"/></figure>
-    <h1>{{jobDetail.companyName}} - {{jobDetail.title}}</h1>
+    <div class="col-sm-2"><figure><img src="{{jobDetail.companyLogo}}" alt="Logo"/></figure></div>
+    <div class="col-sm-10"><h1>{{jobDetail.companyName}} - {{jobDetail.title}}</h1></div>
   </div>
   <div class="row">
     <div><mark *ngFor="let type of jobDetail.types | flatSplit: ';'">{{ type }}</mark></div>
