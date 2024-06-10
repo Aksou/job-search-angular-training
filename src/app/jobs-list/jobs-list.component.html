@@ -6,9 +6,9 @@
           </h1>
 
           {{job.companyName}}    {{job.reference}}</span>
-          <span *ngIf="isFavorite() === 'false'" class="icon-star" [class.active]="job.isFavorite" (click)="addOrRemoveFavorite(job.id)"></span>
+          <span *ngIf="isFavorite() === 'false'" class="icon-star" [class.active]="job.isFavorite" (click)="addOrRemoveFavorite(job.id)"  id="star-{{ job.id }}"></span>
 </div>
-<div class="card" *ngIf="jobsList().length === 0">
+<div class="card fluid" *ngIf="isFavorite() && (jobsList() | favoriteFilter: isFavorite() === 'true').length === 0">
   <span>No favorites</span>
 </div>
 
