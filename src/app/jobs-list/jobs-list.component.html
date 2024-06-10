@@ -1,0 +1,14 @@
+<div class="card fluid" *ngFor="let job of jobsList() | favoriteFilter: isFavorite() === 'true'; trackBy:trackByJobId">
+    <img src="{{job.companyLogo}}" alt="Logo"/>
+    <span>
+          <h1 (click)="openDetailledJob(job.id)">
+            {{job.title}}
+          </h1>
+
+          {{job.companyName}}    {{job.reference}}</span>
+          <span *ngIf="isFavorite() === 'false'" class="icon-star" [class.active]="job.isFavorite" (click)="addOrRemoveFavorite(job.id)"></span>
+</div>
+<div class="card" *ngIf="jobsList().length === 0">
+  <span>No favorites</span>
+</div>
+

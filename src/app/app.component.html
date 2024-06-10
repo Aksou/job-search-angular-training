@@ -1,0 +1,8 @@
+<body>
+  <h1>Find your Job</h1>
+  <header>
+    <a class="button responsive-margin" [routerLink]="['/jobs-list', false]" routerLinkActive="router-link-active">JOBS</a>
+    <a class="button responsive-margin" [routerLink]="['/jobs-list', true]" routerLinkActive="router-link-active">FAVORITE</a>
+  </header>
+  <router-outlet></router-outlet>
+</body>
