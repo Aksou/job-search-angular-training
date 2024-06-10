@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private readonly _jobsService: JobsService) {}
 
   public ngOnInit(): void {
-    // Load all jobs and set them in the service
+    // Load all jobs and set them in the service signal
     this._jobsService.findAllJobs().subscribe();
   }
 }

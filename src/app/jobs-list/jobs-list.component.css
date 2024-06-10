@@ -1,0 +1,9 @@
+a,.icon-star {
+  cursor: pointer;
+}
+
+div:has(> .icon-star) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,9 +1,13 @@
 <ng-container *ngIf="jobDetail() as jobDetail">
   <button (click)="goBack()"><span class="icon-home"></span> Back</button>
-  <h1>{{jobDetail.companyName}} - {{jobDetail.title}}</h1>
-  <img src="{{jobDetail.companyLogo}}" alt="Logo"/>
-  <div><mark *ngFor="let type of jobDetail.types | flatSplit: ';'">{{ type }}</mark></div>
-  <div><mark *ngFor="let industry of jobDetail.industries | flatSplit: ';'">{{ industry }}</mark></div>
+  <div class="row">
+    <figure><img src="{{jobDetail.companyLogo}}" alt="Logo"/></figure>
+    <h1>{{jobDetail.companyName}} - {{jobDetail.title}}</h1>
+  </div>
+  <div class="row">
+    <div><mark *ngFor="let type of jobDetail.types | flatSplit: ';'">{{ type }}</mark></div>
+    <div><mark *ngFor="let industry of jobDetail.industries | flatSplit: ';'">{{ industry }}</mark></div>
+  </div>
   <div><strong>Publish date : </strong>{{jobDetail.publishDate | date }}</div>
   <div><strong>Location : </strong>{{jobDetail.location}}</div>
   <div><strong>Reference : </strong>{{jobDetail.reference}}</div>

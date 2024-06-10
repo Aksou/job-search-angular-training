@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit, Signal, input, signal } from '@angular/core';
-import { JobWithFavorite, JobsService } from '../jobs.service';
+import { JobsService } from '../jobs.service';
+import { JobWithFavorite } from './job-with-favorite.type';
 import { CommonModule } from '@angular/common';
-import { FavoriteFilterPipe } from '../favorite-filter.pipe';
 import { Router } from '@angular/router';
+import { FavoriteFilterPipe } from './favorite-filter.pipe';
 
 @Component({
   selector: 'app-jobs-list',

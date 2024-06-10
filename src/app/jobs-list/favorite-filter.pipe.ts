@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { JobWithFavorite } from './jobs.service';
+import { JobWithFavorite } from './job-with-favorite.type';
 
 @Pipe({
   name: 'favoriteFilter',

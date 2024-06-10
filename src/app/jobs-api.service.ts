@@ -1,27 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
-
-export interface Job {
-  id: number,
-  companyName: string,
-  title: string,
-  companyLogo: string,
-  reference: string,
-}
-
-export interface JobDetail {
-  id: number,
-  companyName: string,
-  title: string,
-  companyLogo: string,
-  reference: string,
-  location: string,
-  industries: string[],
-  types: string[],
-  description: string,
-  publishDate: string,
-}
+import { JobDetail } from './job-form/job-detail';
+import { Job } from './jobs-list/job.interface';
 
 @Injectable({
   providedIn: 'root'

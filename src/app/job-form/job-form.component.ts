@@ -1,7 +1,7 @@
 import { Component, Signal, input } from '@angular/core';
-import { JobDetail } from '../jobs-api.service';
+import { JobDetail } from './job-detail';
 import { CommonModule, DatePipe, Location } from '@angular/common';
-import { FlatSplitPipe } from '../flat-split.pipe';
+import { FlatSplitPipe } from './flat-split.pipe';
 @Component({
   selector: 'app-job-form',
   standalone: true,

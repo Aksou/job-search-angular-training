@@ -1,15 +1,17 @@
-import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
-import { Job, JobsApiService } from './jobs-api.service';
+import { Injectable, SecurityContext, Signal, WritableSignal, signal } from '@angular/core';
+import { JobsApiService } from './jobs-api.service';
+import { Job } from './jobs-list/job.interface';
+import { JobDetail } from './job-form/job-detail';
 import { Observable, OperatorFunction, map, take, tap } from 'rxjs';
-
-export type JobWithFavorite = Job & {isFavorite: boolean}
+import { DomSanitizer } from '@angular/platform-browser';
+import { JobWithFavorite } from './jobs-list/job-with-favorite.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobsService {
   private readonly _jobsList: WritableSignal<JobWithFavorite[]>;
-  constructor(private readonly _jobsApiService: JobsApiService) {
+  constructor(private readonly _jobsApiService: JobsApiService, private readonly _sanitizer: DomSanitizer) {
     this._jobsList = signal([]);
   }
 
@@ -40,5 +42,9 @@ export class JobsService {
       }
       return job;
     }))
+  }
+
+  public findJobById(id: number): Observable<JobDetail | null> {
+    return this._jobsApiService.findJobById(id).pipe(tap(job => this._sanitizer.sanitize(SecurityContext.HTML, job?.description ?? '')))
   }
 }
