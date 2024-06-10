@@ -8,7 +8,7 @@ import { JobWithFavorite } from './job-with-favorite.type';
 export class FavoriteFilterPipe implements PipeTransform {
 
   transform(jobs: JobWithFavorite[], isFavorite: boolean): JobWithFavorite[] {
-    return isFavorite ? jobs.filter((job) => job.isFavorite) : jobs;
+    return isFavorite ? jobs.filter((job: JobWithFavorite) => job.isFavorite) : jobs;
   }
 
 }

@@ -18,7 +18,7 @@ export class JobsListComponent implements OnInit {
   public isFavorite: Signal<string> = input.required<string>();
 
   constructor(private readonly _jobService: JobsService, private readonly _router: Router) {
-    this.jobsList = signal([]);
+    this.jobsList = signal<JobWithFavorite[]>([]);
   }
 
   public ngOnInit(): void {

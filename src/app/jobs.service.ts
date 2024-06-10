@@ -2,7 +2,7 @@ import { Injectable, SecurityContext, Signal, WritableSignal, signal } from '@an
 import { JobsApiService } from './jobs-api.service';
 import { Job } from './jobs-list/job.interface';
 import { JobDetail } from './job-form/job-detail';
-import { Observable, OperatorFunction, map, take, tap } from 'rxjs';
+import { Observable, OperatorFunction, map, tap } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { JobWithFavorite } from './jobs-list/job-with-favorite.type';
 
@@ -12,19 +12,18 @@ import { JobWithFavorite } from './jobs-list/job-with-favorite.type';
 export class JobsService {
   private readonly _jobsList: WritableSignal<JobWithFavorite[]>;
   constructor(private readonly _jobsApiService: JobsApiService, private readonly _sanitizer: DomSanitizer) {
-    this._jobsList = signal([]);
+    this._jobsList = signal<JobWithFavorite[]>([]);
   }
 
   public findAllJobs(): Observable<JobWithFavorite[]> {
     return this._jobsApiService.findAllJobs().pipe(
-      take(1),
       this._retrieveFavorites(),
-      tap(jobs=> this._jobsList.set(jobs)));
+      tap((jobs: JobWithFavorite[])=> this._jobsList.set(jobs)));
   }
 
   private _retrieveFavorites(): OperatorFunction<Job[], JobWithFavorite[]> {
     return map((jobs: Job[]) => (jobs as JobWithFavorite[])
-      .map(job => {
+      .map((job: JobWithFavorite) => {
         job.isFavorite = localStorage.getItem(String(job.id)) === 'true' ?? false;
         return job;
       }));
@@ -35,16 +34,16 @@ export class JobsService {
   }
 
   public setFavorite(id: number): void {
-    this._jobsList.update(jobs => jobs.map(job => {
+    this._jobsList.update((jobs: JobWithFavorite[]) => jobs.map(job => {
       if (job.id === id) {
         job.isFavorite = !job.isFavorite
         job.isFavorite ? localStorage.setItem(String(id), String(true)) : localStorage.removeItem(String(id));
       }
       return job;
-    }))
+    }));
   }
 
   public findJobById(id: number): Observable<JobDetail | null> {
-    return this._jobsApiService.findJobById(id).pipe(tap(job => this._sanitizer.sanitize(SecurityContext.HTML, job?.description ?? '')))
+    return this._jobsApiService.findJobById(id).pipe(tap(job => this._sanitizer.sanitize(SecurityContext.HTML, job?.description ?? '')));
   }
 }

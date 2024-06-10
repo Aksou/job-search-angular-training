@@ -10,11 +10,11 @@ import { FlatSplitPipe } from './flat-split.pipe';
   styleUrl: './job-form.component.css'
 })
 export class JobFormComponent {
-  public jobDetail: Signal<JobDetail | null> = input(null)
+  public jobDetail: Signal<JobDetail | null> = input<JobDetail | null>(null)
 
   constructor(private readonly _location: Location) {}
 
   public goBack(): void {
-    return this._location.back();
+    this._location.back();
   }
 }

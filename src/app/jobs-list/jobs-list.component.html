@@ -7,7 +7,7 @@
           {{job.title}}
         </h1>
       </a>
-        {{job.companyName}}    {{job.reference}}
+        Company: {{job.companyName}} Reference: {{job.reference}}
       </span>
     </div>
     <div class="col-sm-2"><span *ngIf="isFavorite() === 'false'" class="icon-star" [class.active]="job.isFavorite" (click)="addOrRemoveFavorite(job.id)"  id="star-{{ job.id }}"></span></div>
