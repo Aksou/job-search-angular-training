@@ -2,7 +2,7 @@ import { Injectable, SecurityContext, Signal, WritableSignal, signal } from '@an
 import { JobsApiService } from './jobs-api.service';
 import { Job } from './jobs-list/job.interface';
 import { JobDetail } from './job-form/job-detail';
-import { Observable, OperatorFunction, map, tap } from 'rxjs';
+import { Observable, OperatorFunction, filter, map, tap } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { JobWithFavorite } from './jobs-list/job-with-favorite.type';
 
@@ -44,6 +44,9 @@ export class JobsService {
   }
 
   public findJobById(id: number): Observable<JobDetail | null> {
-    return this._jobsApiService.findJobById(id).pipe(tap(job => this._sanitizer.sanitize(SecurityContext.HTML, job?.description ?? '')));
+    return this._jobsApiService.findJobById(id).pipe(
+      filter((job: JobDetail | null): job is JobDetail => job != null),
+      tap((job: JobDetail) => job.description = this._sanitizer.sanitize(SecurityContext.HTML, job?.description ?? '') ?? '')
+    );
   }
 }
